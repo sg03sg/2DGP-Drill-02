@@ -1,5 +1,6 @@
+from pico2d import *
 import math
-from pico2d import*
+
 
 open_canvas()
 
@@ -16,12 +17,14 @@ def plus_move_character(x,speed):
 
 sg =0
 rogic =0
-char_speed =2
+char_speed =5
+deg = 1
 
 while True:
     clear_canvas_now()
     grass.draw_now(400,30)
     character.draw_now(c_x,c_y)
+
     if rogic ==0:
         if sg==0:
             c_x=plus_move_character(c_x,char_speed)
@@ -41,14 +44,14 @@ while True:
                 sg =0
 
     elif rogic ==1:
-        c_y = plus_move_character(c_y,char_speed)
-        c_x = 400 - math.sin(c_y-90/360 * 2 * math.pi)
+        c_y = 300 + 210 * math.sin(-deg/180 * math.pi -math.pi/2)
+        c_x = 400 + 210 * math.cos(-deg/180 * math.pi -math.pi/2)
+        deg += 1
+        if deg == 361:
+            rogic =0
     if(c_x==400 and c_y==90):
         if rogic==0:
             rogic =1
-            sg =0
-        else:
-            rogic=0
             sg =0
     delay(0.01)
 
